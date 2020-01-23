@@ -1,0 +1,26 @@
+{% extends 'login/base (1).html' %}
+
+{% block content %}
+<form action="{% url 'post_product' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="col">
+            <label>Product name:</label>
+            <input class="form-control" name="name" type="text">
+        </div>
+        <div class="col">
+            <label>Product price:</label>
+            <input class="form-control" name="price" type="text">
+        </div>
+        <div class="col">
+            <label>Product picture:</label>
+            <input name="product-pic" type="file" multiple>
+        </div>
+        <div class="col-auto">
+            <input class="btn btn-outline-success my-2 my-sm-0" name="post" type="submit" value="Post Product">
+        </div>
+        
+    </div>
+
+</form>
+{% endblock %}

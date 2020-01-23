@@ -1,0 +1,87 @@
+{% extends 'login/base (1).html' %}
+
+{% block content %}
+
+<h1>This is the checkout page</h1>
+
+<form method='POST'>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label for="validationServer01">First name</label>
+            <input type="text" class="form-control" id="validationServer01" required>
+<!--             <div class="valid-feedback">
+                Looks good!
+            </div> -->
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="validationServer02">Last name</label>
+            <input type="text" class="form-control" id="validationServer02" required>
+<!--             <div class="valid-feedback">
+                Looks good!
+            </div> -->
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="validationServerEmail">Email</label>
+            <div class="input-group">
+                <input type="email" class="form-control" id="validationServerEmail"
+                    aria-describedby="inputGroupPrepend3" required>
+<!--                 <div class="invalid-feedback">
+                    Please provide an email.
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="validationServer03">City</label>
+            <input type="text" class="form-control" id="validationServer03" required>
+<!--             <div class="invalid-feedback">
+                Please provide a valid city.
+            </div> -->
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="validationServer04">State</label>
+            <select class="custom-select" id="validationServer04" required>
+                <option selected disabled value="">Choose...</option>
+                <option value="AB">Alberta</option>
+                <option value="BC">British Columbia</option>
+                <option value="MB">Manitoba</option>
+                <option value="NB">New Brunswick</option>
+                <option value="NL">Newfoundland and Labrador</option>
+                <option value="NS">Nova Scotia</option>
+                <option value="ON">Ontario</option>
+                <option value="PE">Prince Edward Island</option>
+                <option value="QC">Quebec</option>
+                <option value="SK">Saskatchewan</option>
+                <option value="NT">Northwest Territories</option>
+                <option value="NU">Nunavut</option>
+                <option value="YT">Yukon</option>
+            </select>
+            <div class="invalid-feedback">
+                Please select a valid state.
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="validationServer05">Zip</label>
+            <input type="text" class="form-control" id="validationServer05" required>
+<!--             <div class="invalid-feedback">
+                Please provide a valid zip.
+            </div> -->
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck3" required>
+            <label class="form-check-label" for="invalidCheck3">
+                Agree to terms and conditions
+            </label>
+            <div class="invalid-feedback">
+                You must agree before submitting.
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Pay</button>
+</form>
+
+
+{% endblock%}

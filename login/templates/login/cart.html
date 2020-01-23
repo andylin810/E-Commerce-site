@@ -1,0 +1,26 @@
+{% extends 'login/base (1).html' %}
+
+{% block content %}
+
+<p>this is the cart</p>
+
+<ul ul class="list-group">
+{% for product in products %}
+
+<li class="list-group-item d-flex justify-content-between align-items-center">
+    <ul ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">Name: {{product.product.name}}</li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">Price: ${{product.product.price}}</li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">quantity: {{product.quantity}}</li>
+        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{{ product.delete_from_cart_url }}">delete from cart </a></li>
+    </ul>
+</li>
+{% endfor %}
+</ul>
+
+<p>Total Price: ${{total}}</p>
+
+<a class="btn btn-primary" href="{% url 'checkout' %}" role="button">Checkout</a>
+
+
+{% endblock %}

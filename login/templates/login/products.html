@@ -1,0 +1,51 @@
+{% extends 'login/base (1).html' %}
+{% load static %}
+
+{% block content %}
+<nav class="navbar navbar-light bg-light">
+    <form  class="form-inline" action="{% url 'products' %}" method="GET">
+        {% csrf_token %}
+        <select class="form-control" id="exampleFormControlSelect1" name="sort">
+            <option value="price" {% if type == 'price' %}selected{% endif %}>sort by price</option>
+            <option value="date" {% if type == 'date' %}selected{% endif %}>sort by date</option>
+        </select>
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Select">
+    </form>
+</nav>
+
+<nav class="navbar navbar-light bg-light">
+    <form action="{% url 'products' %}" method="GET" class="form-inline">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" name="search">
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search">
+    </form>
+</nav>
+
+<ul ul class="list-group">
+{% for product in products  %}
+
+<li class="list-group-item d-flex justify-content-between align-items-center">
+    <ul ul class="list-group">
+        {% if product.productpicture_set.all %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <img style="width: 200; height: 200;" src="{{product.productpicture_set.first.picture.url}}">
+        </li>
+        <p>{{ product.productpicture_set.first.picture.url }}</p>
+        {% else %}
+        <img style="width: 200; height: 200;" src="{% static 'login/images/default.png' %}">
+        {% endif %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">name: {{product.name}}</li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">price: {{product.price}}</li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">user: {{product.user}}</li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">date: {{product.post_date}}</li>
+        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{{ product.add_to_cart_url }}">add to cart </a></li>
+        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{% url 'product_detail' product.id %}">Detail</a></li>
+        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{{ product.delete_product_url }}">Delete Product </a></li>
+    </ul>
+</li>
+
+{% endfor %}
+</ul>
+<a class='btn btn-danger' href="{% url 'payment'  %}">payment</a>
+
+{% endblock %}
