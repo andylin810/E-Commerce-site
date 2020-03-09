@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<p>this is the cart</p>
+<h2>Shopping Cart</h2>
 
 <ul ul class="list-group">
 {% for product in products %}
@@ -10,7 +10,7 @@
 <li class="list-group-item d-flex justify-content-between align-items-center">
     <ul ul class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-center">Name: {{product.product.name}}</li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">Price: ${{product.product.price}}</li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">Price: ${{product.product.price|floatformat:2}}</li>
         <li class="list-group-item d-flex justify-content-between align-items-center">quantity: {{product.quantity}}</li>
         <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{{ product.delete_from_cart_url }}">delete from cart </a></li>
     </ul>
@@ -18,7 +18,9 @@
 {% endfor %}
 </ul>
 
-<p>Total Price: ${{total}}</p>
+<p><b>Subtotal: </b>${{subtotal|floatformat:2 }}</p>
+<p><b>Tax: </b>${{tax|floatformat:2}}</p>
+<p><b>Total: </b>${{total|floatformat:2 }}</p>
 
 <a class="btn btn-primary" href="{% url 'checkout' %}" role="button">Checkout</a>
 

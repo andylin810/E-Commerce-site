@@ -3,7 +3,7 @@
 
 {% block content %}
 <nav class="navbar navbar-light bg-light">
-    <form  class="form-inline" action="{% url 'products' %}" method="GET">
+    <form class="form-inline" action="{% url 'products' %}" method="GET">
         {% csrf_token %}
         <select class="form-control" id="exampleFormControlSelect1" name="sort">
             <option value="price" {% if type == 'price' %}selected{% endif %}>sort by price</option>
@@ -21,31 +21,94 @@
     </form>
 </nav>
 
-<ul ul class="list-group">
-{% for product in products  %}
 
-<li class="list-group-item d-flex justify-content-between align-items-center">
-    <ul ul class="list-group">
-        {% if product.productpicture_set.all %}
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            <img style="width: 200; height: 200;" src="{{product.productpicture_set.first.picture.url}}">
-        </li>
-        <p>{{ product.productpicture_set.first.picture.url }}</p>
-        {% else %}
-        <img style="width: 200; height: 200;" src="{% static 'login/images/default.png' %}">
-        {% endif %}
-        <li class="list-group-item d-flex justify-content-between align-items-center">name: {{product.name}}</li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">price: {{product.price}}</li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">user: {{product.user}}</li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">date: {{product.post_date}}</li>
-        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{{ product.add_to_cart_url }}">add to cart </a></li>
-        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{% url 'product_detail' product.id %}">Detail</a></li>
-        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{{ product.delete_product_url }}">Delete Product </a></li>
-    </ul>
-</li>
+<div class="row">
+    <div class="column">
+        <div class=" card">
 
+
+            <ul class="list-group d-flex justify-content-between align-items-center">
+
+                {% for product in page_obj  %}
+
+                <li class=" list-group-item d-flex justify-content-between align-items-center">
+                    <ul class="list-group d-flex justify-content-between align-items-center">
+                        {% if product.productpicture_set.all %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <img style="width:250px ; height: 200px;"
+                                src="{{product.productpicture_set.first.picture.url}}">
+                        </li>
+                        <!--<p>{{ product.productpicture_set.first.picture.url }}</p>-->
+                        {% else %}
+                        <img style="width: 250px; height: 200px;" src="{% static 'login/images/default.png' %}">
+                        {% endif %}
+                        <h4>{{product.name}}</h4>
+                        <p class="price">${{product.price|floatformat:2}}</p>
+                        <p>User: {{product.user}}<br> Posted On: {{product.post_date}}</p>
+
+                        <button><a href="{% url 'product_detail' product.id %}">View More Details</a></button>
+                        <button><a href="{{ product.add_to_cart_url }}">Add to Cart </a></button>
+                        <button><a href="{{ product.delete_product_url }}">Delete</a></button>
+
+
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
 {% endfor %}
-</ul>
-<a class='btn btn-danger' href="{% url 'payment'  %}">payment</a>
 
+
+<!-- Paginator to split products into 5 per page -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+            {% else %}
+            <li class="page-item disabled"><a class="page-link" href="">&laquo; first</a></li>
+            <li class="page-item disabled"><a class="page-link" href="">previous</a></li>
+
+            {% endif %}
+
+                <li class="page-item">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</li>
+            
+
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+            {% else %}
+            <li class="page-item disabled"><a class="page-link" href="">next</a></li>
+            <li class="page-item disabled"><a class="page-link" href="">last &raquo;</a></li>
+            
+            {% endif %}
+        </span>
+    </ul>
+</nav>
+<!--  -->
+
+
+<!--
+<div class="pagination">
+  <a href="#">1</a>
+  <a href="#">2</a>
+  <a href="#">3</a>
+  <a href="#">4</a>
+  <a href="#">5</a>
+</div>
+
+<script>
+function productsPerPage( $columns)
+{
+  $columns = 5;
+  return $columns;
+}
+</script>
+
+-->
+<!--<a class='btn btn-danger' href="{% url 'payment'  %}">payment</a>
+-->
 {% endblock %}
