@@ -1,6 +1,10 @@
 {% extends 'login/base (1).html' %}
 {% load static %}
 
+{% block extrahead %}
+<link rel="stylesheet" href="/static/login/products.css?{% now "U" %}" />
+{% endblock %}
+
 {% block content %}
 <nav class="navbar navbar-light bg-light">
     <form class="form-inline" action="{% url 'products' %}" method="GET">
@@ -21,73 +25,87 @@
     </form>
 </nav>
 
+<div class="body-product">
+    <div class="row">
 
-<div class="row">
-    <div class="column">
-        <div class=" card">
+        <div class="col-2 panel-left">
+            <div>
+                <h4 class="nav-link nav-item">Categories</h4>
+                <a class="nav-link nav-item active item-category" href="#">Appliances (200)</a>
+                <a class="nav-link nav-item item-category" href="#">Toys (198)</a>
+                <a class="nav-link nav-item item-category" href="#">Computers (111)</a>
+            </div>
+        </div>
 
-
-            <ul class="list-group d-flex justify-content-between align-items-center">
-
+        <div class="col-10">
+            <div class="product-container">
                 {% for product in page_obj  %}
-
-                <li class=" list-group-item d-flex justify-content-between align-items-center">
-                    <ul class="list-group d-flex justify-content-between align-items-center">
+                <div class="product-card">
+                    <div class="list-group d-flex">
                         {% if product.productpicture_set.all %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <img style="width:250px ; height: 200px;"
-                                src="{{product.productpicture_set.first.picture.url}}">
-                        </li>
-                        <!--<p>{{ product.productpicture_set.first.picture.url }}</p>-->
+                        <a class="product-img" href="{% url 'product_detail' product.id %}">
+                            <img style="width: 100%; height: 180px; margin-bottom: 20px;"
+                            src="{{product.productpicture_set.first.picture.url}}">
+                        </a>
                         {% else %}
-                        <img style="width: 250px; height: 200px;" src="{% static 'login/images/default.png' %}">
+                        <a class="product-img" href="{% url 'product_detail' product.id %}">
+                            <img style="width: 100%; height: 180px; margin-bottom: 20px;" src="{% static 'login/images/default.png' %}">
+                        </a>
                         {% endif %}
-                        <h4>{{product.name}}</h4>
-                        <p class="price">${{product.price|floatformat:2}}</p>
-                        <p>User: {{product.user}}<br> Posted On: {{product.post_date}}</p>
+                        <p style="font-size: 16;">{{product.name}}</p>
+                        <a class="rating" href="#">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                
+                        </a>
+                        <h4 class="price">${{product.price|floatformat:2}}</h4>
+                       <!--  <p>User: {{product.user}}<br> Posted On: {{product.post_date}}</p> -->
 
-                        <button><a href="{% url 'product_detail' product.id %}">View More Details</a></button>
+                        <!-- <button><a href="{% url 'product_detail' product.id %}">View More Details</a></button> -->
                         <button><a href="{{ product.add_to_cart_url }}">Add to Cart </a></button>
                         <button><a href="{{ product.delete_product_url }}">Delete</a></button>
 
 
-                    </ul>
-                </li>
-
-            </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
-{% endfor %}
 
-
-<!-- Paginator to split products into 5 per page -->
-<nav aria-label="Page navigation example">
+<!-- Paginator to split products into 9 per page -->
+<div class="container-pagination">
     <ul class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
             <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            </li>
             {% else %}
             <li class="page-item disabled"><a class="page-link" href="">&laquo; first</a></li>
             <li class="page-item disabled"><a class="page-link" href="">previous</a></li>
 
             {% endif %}
 
-                <li class="page-item">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</li>
-            
+            <li class="page-item">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</li>
+
 
             {% if page_obj.has_next %}
             <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            </li>
             {% else %}
             <li class="page-item disabled"><a class="page-link" href="">next</a></li>
             <li class="page-item disabled"><a class="page-link" href="">last &raquo;</a></li>
-            
+
             {% endif %}
         </span>
     </ul>
-</nav>
+</div>
 <!--  -->
 
 

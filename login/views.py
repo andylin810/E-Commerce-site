@@ -48,7 +48,7 @@ def productlist(request):
         term = request.GET['search']
         product_list = Product.objects.filter(name__contains=term)
     
-    paginator = Paginator(product_list,5)
+    paginator = Paginator(product_list,9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

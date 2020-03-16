@@ -62,6 +62,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {
   font-family:  sans-serif;
   background-size: cover;
 }
+
+h4{
+  font-weight: bold;
+}
+
 align-below {
   margin-left: 95px;
   }
@@ -72,7 +77,6 @@ align-below {
   }
 
   .container{
-    margin-top: 100px;
     padding: 2px;
     }
     
@@ -91,11 +95,6 @@ align-below {
 
     }
     
-    .price {
-      color: grey;
-      font-size: 18px;
-    }
-    
    
     .product-price{
       color: #FE980F;
@@ -104,12 +103,12 @@ align-below {
       padding-top: 20px; 
     }
 
-    input{
+/*     input{
       border: 1px solid #ccc;
       height: 33px;
       text-align: center;
       width: 30px;
-    }
+    } */
 
     .cart{
       background: #FE980F;
@@ -119,7 +118,7 @@ align-below {
       width: 70%;
     }
     
-    
+    /* 
     button {
       border: none;
       outline: 0;
@@ -130,7 +129,7 @@ align-below {
       cursor: pointer;
       width: 100%;
       font-size: 14px;
-    }
+    } */
 /*
   
     .card button {
@@ -152,12 +151,13 @@ align-below {
 
     
 footer {
-      position: relative;
+      margin-top: 100px;
       width: 100%;
       background-color:#535f7e;
       color: white;
       text-align: center;
       padding: 1rem;
+      height: 200px;
       
    } 
     /*
@@ -228,6 +228,7 @@ row:after {
 
 .pagination {
   display: inline-block;
+  margin: auto;
 }
 
 .pagination a {
@@ -248,7 +249,6 @@ row:after {
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
 
-    
 /*
 ul {
 list-style-type: none;
