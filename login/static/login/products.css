@@ -1,0 +1,41 @@
+/* Andy product page css */
+
+.product-card{
+    width: 30%;
+    display: inline-block;
+    margin: 10px;
+    max-height: 450px;
+  }
+  
+  .product-container{
+    margin: 80px auto 20px auto;
+    width: 90%;
+  }
+  
+  .container-pagination{
+    max-width: 35%;
+    margin: auto;
+  }
+  
+  .panel-left{
+    height: 100%; 
+    border-right: 1px solid rgb(148, 146, 146);
+  }
+  
+  .body-product{
+    height: auto;
+    display: flex;
+  }
+  
+  .item-category{
+    border-bottom: 1px solid rgb(148, 146, 146);
+  }
+  
+  .rating{
+    display: inline-block;
+    width: 100px;
+  }
+  
+  .rating:hover{
+    text-decoration: none;
+  }  

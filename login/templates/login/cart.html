@@ -1,10 +1,106 @@
 {% extends 'login/base (1).html' %}
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="/static/login/cart.css?{% now "U" %}" />
+{% endblock %}
 
 {% block content %}
 
-<h2>Shopping Cart</h2>
+<h2>Your Cart</h2>
 
-<ul ul class="list-group">
+<div class="row">
+    <div class="left-container col-8">
+        {% for orderproduct in products %}
+        <div class="product-container rounded border">
+            <div class="product-item">
+                {{orderproduct.product.name}} dasdasdasdsaadsadasdsadsadasdsad
+            </div>
+            <div class="product-item">
+                <a href="{% url 'product_detail' orderproduct.product.id %}">
+                    {% if orderproduct.product.productpicture_set.all %}
+                    <img src="{{orderproduct.product.productpicture_set.first.picture.url}}">
+                    {% else %}
+                    <img src="{% static 'login/images/default.png' %}">
+                    {% endif %}
+                </a>
+                <div class="product-info">
+                    <div class="price">
+                        ${{orderproduct.product.price|floatformat:2}}
+                    </div>
+                    <div class="quantity">
+                        <button style="margin-right: 5px;">
+                            <i class="fa fa-minus-circle fa-lg" aria-hidden="true"></i>
+                        </button>
+                        {{orderproduct.quantity}}
+                        <button style="margin-left: 5px;">
+                            <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item border-bottom">
+                <a href="{{ orderproduct.delete_from_cart_url }}" class="btn btn-danger">remove</a>
+            </div>
+            <div class="product-item border-bottom">
+                <div style="float: left; font-weight: bold;">
+                    Product Total:
+                </div>
+                <div class="price-total">
+                    ${{orderproduct.product.price|floatformat:2}}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="right-container col-4">
+        <div style="width: 100%;">
+            <h2 class="border-top" style="padding-top: 10px;">Order Summary</h2>
+        </div>
+        <div style="padding-bottom: 10px; width: 100%;">
+            <table style="width: 100%;"> 
+                <tbody class="border-bottom" style="margin-bottom: 10px;">
+                    <tr>
+                        <td>
+                            Product Subtotal:
+                        </td>
+                        <td align="right">
+                            ${{subtotal|floatformat:2 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Estimated Taxes:
+                        </td>
+                        <td align="right">
+                            ${{tax|floatformat:2 }}
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="estimated-total">
+                        <td>
+                            Estimated Total:
+                        </td>
+                        <td align="right">
+                            ${{total|floatformat:2 }}
+                        </td>
+                    </tr>
+
+                </tfoot>
+            </table>
+        </div>
+        <div style="height: 40px; line-height: 40px;">
+            <a href="{% url 'checkout' %}" class="btn-checkout">Checkout</a>
+        </div>
+
+
+
+    </div>
+</div>
+
+<!-- <ul ul class="list-group">
 {% for product in products %}
 
 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -16,13 +112,13 @@
     </ul>
 </li>
 {% endfor %}
-</ul>
+</ul> -->
 
-<p><b>Subtotal: </b>${{subtotal|floatformat:2 }}</p>
+<!-- <p><b>Subtotal: </b>${{subtotal|floatformat:2 }}</p>
 <p><b>Tax: </b>${{tax|floatformat:2}}</p>
 <p><b>Total: </b>${{total|floatformat:2 }}</p>
 
 <a class="btn btn-primary" href="{% url 'checkout' %}" role="button">Checkout</a>
-
+ -->
 
 {% endblock %}

@@ -1,10 +1,7 @@
-<!-- BASE (1)/html-->
-
 {% load static %}
 <html>
 
 <head>
-
     <title>Home page</title>
     {% block head %}
     {% endblock %}
@@ -13,47 +10,27 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'login/style2-new.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'login/style2-new.css' %}"> -->
 
-    <!-- <link rel="stylesheet" type="text/css" href="/static/login/style.css?{% now "U" %}" /> -->
+    <link rel="stylesheet" type="text/css" href="/static/login/style2-new.css?{% now "U" %}" />
+    {% block extrahead %}
+    {% endblock %}
 
 </head>
 
 <body>
-    <!-- <nav class="navbar navbar-expand-lg" navbar-dark bg-dark">
-
-
-        <a class="navbar-brand" href="javascript:void(0)">BUY|SELL</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    -->
-
-    <!--<a href="{% url 'products' %}" class="dropbtn">Products</a>-->
-    <!--  
-            <div class="dropdown">
-            <a href="{% url 'products' %}"class="dropbtn">Products</a>
-            <div class="dropdown-content">
-            <a href="#">Fashion</a>
-            <a href="#">Home & Garden</a>
-            <a href="#">Electronics</a>
-            <a href="#">Other</a>
-        </div>
-    </div>
--->
     <ul class="navbar">
-        <li><a class="navbar-brand" href="{% url 'products' %}">BUY|SELL</a>
-        </li>
+        <li><a class="navbar-brand" href="{% url 'products' %}">BUY|SELL</a></li>
         <li><a class="nav-link" href="{% url 'products' %}">Products</a></li>
         <li><a class="nav-link" href="{% url 'post_product' %}">Post Product</a></li>
         <li><a class="nav-link" href="#"><i class="fa fa-fw fa-envelope"></i>Contact</a></li>
 
         <li style="float:right"><a class="nav-link" href="{% url 'register' %}"><i class="fa fa-fw fa-user"></i>Sign
                 Up</a></li>
-        <li style="float:right"><a class="nav-link" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i>Cart</a>
+        <li style="float:right"><a class="nav-link" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart</a>
         </li>
         {% if user.is_authenticated %}
         <li style="float:right"><a class="nav-link" href="{% url 'logout' %}">Log out</a></li>
@@ -78,24 +55,6 @@
             <h5>Welcome, {{user.username}}</h5>
             {% endif %}
 
-            <!--<img src="{% static 'login/images/buysell.jpg' %}" alt="BuySell" style="width:100%">
-                <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
-                    <h2 class="w3-hide-small">Buy Anything for Less!</h2>
-                    <h2 class="w3-hide-small">Sell Anything!</h2>
-                    <p><a href="{% url 'products' %}" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
-                </div>
-            </div>
-        -->
-            <!--
-        <section>
-            <img class="mySlides" src="img_band_la.jpg" style="width:100%">
-            <img class="mySlides" src="img_band_ny.jpg" style="width:100%">
-            <img class="mySlides" src="img_band_chicago.jpg" style="width:100%">
-          </section>
-
-          <h2 class="w3-center">Automatic Slideshow</h2>
-        -->
-            <!--<div class="w3-content w3-section" style="max-width:500px">  -->
             <section>
                 <img class="mySlides" src="{% static 'login/images/computer.jpg' %}" style="width:100%">
                 <img class="mySlides" src="{% static 'login/images/cart.jpg' %}" style="width:100%">
@@ -116,6 +75,8 @@
 
             {% block content %}
             {% endblock %}
+        </div>
+    </div>
 </body>
 
 
@@ -149,6 +110,7 @@
     </div>
 
 </footer>
+
 <script>
     var myIndex = 0;
     carousel();
