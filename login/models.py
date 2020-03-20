@@ -88,7 +88,7 @@ class Cart(models.Model):
     def total_price(self):
         total = 0
         for item in self.products.all():
-            total += int(item.get_total())
-        """ tax = total * 0.13
-        total += tax """
+            total += item.get_total()
+        tax = total * 0.13
+        total += tax
         return total
