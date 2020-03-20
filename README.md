@@ -9,6 +9,12 @@ This is a basic E-commerce site which includes the following functionalities:
 
 # Screenshots of the site
 
+![alt text](https://github.com/andylin810/E-Commerce-site/blob/master/screenshots/1.JPG "Home Page")
+![alt text](https://github.com/andylin810/E-Commerce-site/blob/master/screenshots/2.JPG "Home Page")
+![alt text](https://github.com/andylin810/E-Commerce-site/blob/master/screenshots/3.JPG "Cart Page")
+
+
+
 This site is developed using the Django framework. All of the Django views were coded using functional based Django views for learning purposes for me to understand better how Django works, however they will be changed to Django's class based views for code efficiency later. Also, SQLite is the local story database that is being used by this site, it will and should be changed to other database such as PostgreSQL, the Stripe key should also be changed to your own accordingly to test for payments in settings.py
 .
 The site is still in development, and it will have more functionalities implemented and it will also receive more UI polishing.
