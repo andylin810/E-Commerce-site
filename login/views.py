@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 import stripe
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
@@ -98,23 +98,68 @@ def post_product(request):
 @login_required(login_url='/login/')
 def cart(request):
     cart, created = Cart.objects.get_or_create(user=request.user, ordered=False)
-    order_product_list = cart.products.order_by('-product__price')
-    subtotal = 0
-    for order_product in order_product_list:
-        subtotal += order_product.product.price * order_product.quantity
-    tax = subtotal * 0.13
-    total = subtotal + tax
+    if request.is_ajax():
+        try:
+            order_product_list = cart.products.order_by('-product__price')
+            subtotal = 0
+            id = request.GET['product_id']
+            button_type = request.GET['type']
+            product = OrderProduct.objects.get(pk=id)
+            if button_type == 'minus':
+                if product.quantity > 1 :
+                    product.quantity -= 1
+                    product.save()
+                    print(product.product.price * -1)
+                else:
+                    product.delete()
+            elif button_type == 'add':
+                    product.quantity += 1
+                    product.save()
+                    print(product.product.price)
 
-    context = {
-        'products': order_product_list,
-        'subtotal': subtotal,
-        'tax' : tax,
-        'total' : total
-    }
+            #calculate subtotal after quantity change
+            for order_product in order_product_list:
+                subtotal += order_product.get_total()
+            tax = subtotal * 0.13
+            total = subtotal + tax
 
-    return render(request, 'login/cart.html', context)
+            # if product is deleted return 0
+            if not OrderProduct.objects.filter(pk=id).exists():
+                return JsonResponse({
+                    'quantity': 0,
+                    'subtotal' : subtotal,
+                    'tax' : tax,
+                    'total': total
+                    })
+            # otherwise
+            else:
+                return JsonResponse({
+                    'quantity': product.quantity,
+                    'subtotal' : subtotal,
+                    'tax' : tax,
+                    'total': total
+                    })
+        except:
+            pass
+    elif request.method == "GET":
+        print("get")
+        order_product_list = cart.products.order_by('-product__price')
+        subtotal = 0
+        for order_product in order_product_list:
+            subtotal += order_product.get_total()
+        tax = subtotal * 0.13
+        total = subtotal + tax
 
+        context = {
+            'products': order_product_list,
+            'subtotal': subtotal,
+            'tax' : tax,
+            'total' : total
+        }
 
+        return render(request, 'login/cart.html', context)
+
+@login_required(login_url='/login/')
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     order_product, created = OrderProduct.objects.get_or_create(
@@ -227,7 +272,7 @@ def make_payment(request):
 
         cart = Cart.objects.get(user=request.user, ordered=False)
         price = cart.total_price() * 100
-
+        price = int(price)
         try:
             # Use Stripe's library to make requests...
             charge = stripe.Charge.create(

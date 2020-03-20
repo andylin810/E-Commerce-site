@@ -11,7 +11,7 @@
 <div class="row">
     <div class="left-container col-8">
         {% for orderproduct in products %}
-        <div class="product-container rounded border">
+        <div id="product{{orderproduct.pk}}" class="product-container rounded border">
             <div class="product-item">
                 {{orderproduct.product.name}} dasdasdasdsaadsadasdsadsadasdsad
             </div>
@@ -28,11 +28,11 @@
                         ${{orderproduct.product.price|floatformat:2}}
                     </div>
                     <div class="quantity">
-                        <button style="margin-right: 5px;">
+                        <button id="quantity" value="minus" data-pid="{{orderproduct.pk}}" style="margin-right: 5px;">
                             <i class="fa fa-minus-circle fa-lg" aria-hidden="true"></i>
                         </button>
-                        {{orderproduct.quantity}}
-                        <button style="margin-left: 5px;">
+                        <p id="amount{{orderproduct.pk}}">{{orderproduct.quantity}}</p>
+                        <button id="quantity" value="add" data-pid="{{orderproduct.pk}}" style="margin-left: 5px;">
                             <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -46,7 +46,7 @@
                     Product Total:
                 </div>
                 <div class="price-total">
-                    ${{orderproduct.product.price|floatformat:2}}
+                    <p>${{orderproduct.product.price|floatformat:2}}</p>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
                             Product Subtotal:
                         </td>
                         <td align="right">
-                            ${{subtotal|floatformat:2 }}
+                            <p id="subtotal">${{subtotal|floatformat:2 }}</p>
                         </td>
                     </tr>
                     <tr>
@@ -74,7 +74,7 @@
                             Estimated Taxes:
                         </td>
                         <td align="right">
-                            ${{tax|floatformat:2 }}
+                            <p id="tax">${{tax|floatformat:2 }}</p>
                         </td>
                     </tr>
                 </tbody>
@@ -84,7 +84,7 @@
                             Estimated Total:
                         </td>
                         <td align="right">
-                            ${{total|floatformat:2 }}
+                            <p id="total">${{total|floatformat:2 }}</p>
                         </td>
                     </tr>
 
@@ -100,25 +100,40 @@
     </div>
 </div>
 
-<!-- <ul ul class="list-group">
-{% for product in products %}
 
-<li class="list-group-item d-flex justify-content-between align-items-center">
-    <ul ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">Name: {{product.product.name}}</li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">Price: ${{product.product.price|floatformat:2}}</li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">quantity: {{product.quantity}}</li>
-        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{{ product.delete_from_cart_url }}">delete from cart </a></li>
-    </ul>
-</li>
-{% endfor %}
-</ul> -->
+{% endblock %}
 
-<!-- <p><b>Subtotal: </b>${{subtotal|floatformat:2 }}</p>
-<p><b>Tax: </b>${{tax|floatformat:2}}</p>
-<p><b>Total: </b>${{total|floatformat:2 }}</p>
 
-<a class="btn btn-primary" href="{% url 'checkout' %}" role="button">Checkout</a>
- -->
+{% block javascript %}
+<script type="text/javascript">
+    $("[id=quantity]").click(function() {
+        var id = $(this).attr("data-pid");
+        $.ajax(
+            {
+                type: 'GET',
+                url: "{% url 'cart' %}",
+                data: {
+                    type: $(this).val(),
+                    product_id: id
+                },
+                success: function(data) {
+                    if (data.quantity == 0) $('#product'+id).remove();
+                    else {
+                        $('#amount'+id).text(data.quantity);
+                    }
+                    //update subtotal, tax and total
+                    $('#subtotal').text('$'+ (data.subtotal).toFixed(2));
+                    $('#tax').text('$'+ (data.tax).toFixed(2));
+                    $('#total').text('$'+(data.total).toFixed(2));
+                }
+            }
+        );
+    });
 
+    //refresh page after clicking back button to show updated info from ajax
+    if(!!window.performance && window.performance.navigation.type == 2)
+{
+    window.location.reload();
+}
+</script>
 {% endblock %}

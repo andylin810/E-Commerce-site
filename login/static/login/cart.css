@@ -73,3 +73,7 @@ tr.estimated-total td{
     text-decoration: none;
     color: black;
 }
+
+p{
+    display: inline;
+}
