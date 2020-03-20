@@ -134,5 +134,6 @@ MEDIA_URL = '/pictures/'
 #Session expiry at browser closing
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+#Change these to your own Stripe keys
 STRIPE_SECRET_KEY = "sk_test_O7Nz2VXJjP0vD43WMp9MKlPs00XSD2s15r"
 STRIPE_PUBLISHABLE_KEY = "pk_test_DgSbxGgDgqKqc783WUCJ7qLZ00V8cYOAx6"
