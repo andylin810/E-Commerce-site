@@ -1,0 +1,141 @@
+{% load static %}
+<html>
+
+<head>
+    <title>Home page</title>
+    {% block head %}
+    {% endblock %}
+    <link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'login/style2-new.css' %}"> -->
+
+    <link rel="stylesheet" type="text/css" href="/static/login/style2-new.css?{% now "U" %}" />
+    {% block extrahead %}
+    {% endblock %}
+
+</head>
+
+<body>
+    <ul class="navbar">
+        <li><a class="navbar-brand" href="{% url 'home' %}">BUY|SELL</a></li>
+        <li><a class="nav-link" href="{% url 'products' %}">Products</a></li>
+        <li><a class="nav-link" href="{% url 'post_product' %}">Post Product</a></li>
+        <li><a class="nav-link" href="{% url 'contact' %}"><i class="fa fa-fw fa-envelope"></i>Contact</a></li>
+
+        <li style="float:right"><a class="nav-link" href="{% url 'register' %}"><i class="fa fa-fw fa-user"></i>Sign
+                Up</a></li>
+        <li style="float:right"><a class="nav-link" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li style="float:right"><a class="nav-link" href="{% url 'logout' %}">Log out</a></li>
+        {% endif %}
+    </ul>
+
+    {% if messages %}
+
+    {% for message in messages %}
+    <p class="alert alert-danger">{{message}} </p>
+    {% endfor %}
+
+    {% endif %}
+
+
+    <!--Home Page Callout/Jumbotron-->
+
+
+    <div class="container">
+        <div class="w3-display-container w3-container">
+            {% if user.is_authenticated %}
+            <h5>Welcome, {{user.username}}</h5>
+            {% endif %}
+
+            <section>
+                <img class="mySlides" src="{% static 'login/images/computer.jpg' %}" style="width:100%">
+                <img class="mySlides" src="{% static 'login/images/cart.jpg' %}" style="width:100%">
+                <img class="mySlides" src="{% static 'login/images/cartbox.jpg' %}" style="width:100%">
+                <img class="mySlides" src="{% static 'login/images/bags.jpg' %}" style="width:100%">
+            </section>
+
+            <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
+                <br>
+                <br>
+                <h2 class="w3-hide-small">Buy Anything for Less!</h2>
+                <h2 class="w3-hide-small">Sell Anything!</h2>
+                <p><a href="{% url 'products' %}" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
+            </div>
+
+            <br>
+
+
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <section class="main col-md-6">
+                <h5>About Company</h5>
+                <p class="grey-text text-lighten-4">Andy Lin and Sahrish Malik have both come together with this
+                    company. They would like users to be able to sell and buy items on a website to help both buyers and
+                    sellers. </p>
+            </section>
+            <section class="col-md-6">
+                <h5><i class="fa fa-fw fa-envelope"></i>Contact</h5>
+                <p class="grey-text text-lighten-4">Andy Lin </p>
+                <p class="grey-text text-lighten-4">Sahrish Malik </p>
+            </section>
+
+
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p> © BUY|SELL. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<script>
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) { myIndex = 1 }
+        x[myIndex - 1].style.display = "block";
+        setTimeout(carousel, 2000); // Change image every 2 seconds
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</html>
