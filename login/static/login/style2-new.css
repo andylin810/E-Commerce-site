@@ -62,6 +62,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {
   font-family:  sans-serif;
   background-size: cover;
 }
+
+h4{
+  font-weight: bold;
+}
+
 align-below {
   margin-left: 95px;
   }
@@ -71,11 +76,15 @@ align-below {
   width: 1000px;
   }
 
-  div.container{
+  .container{
     padding: 2px;
-
     }
     
+    .detail{
+      margin-top: 100px;
+      margin-bottom: 100px;
+    }
+
     .card {
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       max-width: 500px;
@@ -86,13 +95,30 @@ align-below {
 
     }
     
-    .price {
-      color: grey;
-      font-size: 18px;
+   
+    .product-price{
+      color: #FE980F;
+      font-size: 26px;
+      font-weight: bold;
+      padding-top: 20px; 
+    }
+
+/*     input{
+      border: 1px solid #ccc;
+      height: 33px;
+      text-align: center;
+      width: 30px;
+    } */
+
+    .cart{
+      background: #FE980F;
+      color: #ffffff;
+      font-size: 15px;
+      margin-left: 20px ;
+      width: 70%;
     }
     
-    
-    
+    /* 
     button {
       border: none;
       outline: 0;
@@ -103,7 +129,7 @@ align-below {
       cursor: pointer;
       width: 100%;
       font-size: 14px;
-    }
+    } */
 /*
   
     .card button {
@@ -125,14 +151,13 @@ align-below {
 
     
 footer {
-      position: relative;
-      left: 0;
-      bottom: 0;
+      margin-top: 100px;
       width: 100%;
       background-color:#535f7e;
       color: white;
       text-align: center;
       padding: 1rem;
+      height: 200px;
       
    } 
     /*
@@ -175,54 +200,55 @@ footer{
     }
     */
 
-    /*Float four columns side by side */
-    column {
-      float: left;
-      width: 25%;
-      padding: 0 10px;
-    }
-    
-    /* Remove extra left and right margins, due to padding */
-    row {margin: 0 -5px;}
-    
-    /* Clear floats after the columns */
-    row:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-    
-    /* Responsive columns */
-    @media screen and (max-width: 600px) {
-      column {
-        width: 100%;
-        display: block;
-        margin-bottom: 20px;
-      }
-    }
+/*Float four columns side by side */
+column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
 
-    .pagination {
-      display: inline-block;
-    }
-    
-    .pagination a {
-      color: black;
-      float: left;
-      padding: 8px 16px;
-      text-decoration: none;
-      transition: background-color .3s;
-      border: 1px solid #ddd;
-    }
-    
-    .pagination a.active {
-      background-color: #4CAF50;
-      color: white;
-      border: 1px solid #4CAF50;
-    }
-    
-    .pagination a:hover:not(.active) {background-color: #ddd;}
+/* Remove extra left and right margins, due to padding */
+row {margin: 0 -5px;}
 
-    
+/* Clear floats after the columns */
+row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+.pagination {
+  display: inline-block;
+  margin: auto;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+
 /*
 ul {
 list-style-type: none;
