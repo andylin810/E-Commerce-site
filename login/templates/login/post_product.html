@@ -1,65 +1,7 @@
 {% extends 'login/base (1).html' %}
-{% load static %}
-{% block extrahead %}
-<link rel="stylesheet" href="/static/login/post_product.css?{% now "U" %}" />
-
-{% endblock %}
 
 {% block content %}
-
-<body>
-
-    <div class="jumbotron jumbotron-fluid bg-dark">
-  
-        <div class="jumbotron-background">
-          <img src="https://placeimg.com/2000/1000/nature" class="blur ">
-        </div>
-      
-        <div class="container text-white" style="text-align:center">
-      
-          <h1 class="display-4">Post a Product</h1>
-
-      
-        </div>
-        <!-- /.container -->
-        
-       
-      </div>
-      
-
-<div class="row justify-content-md-center">
-<div class="col-md-6" >
-    
-<div class="ex1">
-  <form action="{% url 'post_product' %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <label for="name">Product Name</label>
-    <input type="text" id="name" name="name" placeholder="Product name">
-<br>
-    <label for="price">Product Price ($)</label>
-    <input type="text" id="price" name="price" placeholder="Product price">
-<br>
-    <label for="category">Category</label>
-    <select id="category" name="category">
-      <option value="C">Computer</option>
-                <option value="A">Appliance</option>
-                <option value="T">Toy</option>
-    </select>
-    <br>
-             <label>Product picture</label>
-            <br>
-            <br>
-            <input name="product-pic" type="file" multiple>
-       <br><br>
-    <input type="submit" value="Submit">
-  </form>
-</div>
-</div>
-</div>
-<!-- 
-    ---OLD FORM LAYOUT---
-    
-    <form action="{% url 'post_product' %}" method="POST" enctype="multipart/form-data">
+<form action="{% url 'post_product' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-row">
         <div class="col">
@@ -89,6 +31,4 @@
     </div>
 
 </form>
--->
-</body>
 {% endblock %}

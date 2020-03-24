@@ -23,10 +23,10 @@
 
 <body>
     <ul class="navbar">
-        <li><a class="navbar-brand" href="{% url 'home' %}">BUY|SELL</a></li>
+        <li><a class="navbar-brand" href="{% url 'products' %}">BUY|SELL</a></li>
         <li><a class="nav-link" href="{% url 'products' %}">Products</a></li>
         <li><a class="nav-link" href="{% url 'post_product' %}">Post Product</a></li>
-        <li><a class="nav-link" href="{% url 'contact' %}"><i class="fa fa-fw fa-envelope"></i>Contact</a></li>
+        <li><a class="nav-link" href="#"><i class="fa fa-fw fa-envelope"></i>Contact</a></li>
 
         <li style="float:right"><a class="nav-link" href="{% url 'register' %}"><i class="fa fa-fw fa-user"></i>Sign
                 Up</a></li>
@@ -46,7 +46,31 @@
     {% endif %}
 
 
-   
+    <!--Home Page Callout/Jumbotron-->
+
+
+    <div class="container">
+        <div class="w3-display-container w3-container">
+            {% if user.is_authenticated %}
+            <h5>Welcome, {{user.username}}</h5>
+            {% endif %}
+
+            <section>
+                <img class="mySlides" src="{% static 'login/images/computer.jpg' %}" style="width:100%">
+                <img class="mySlides" src="{% static 'login/images/cart.jpg' %}" style="width:100%">
+                <img class="mySlides" src="{% static 'login/images/cartbox.jpg' %}" style="width:100%">
+                <img class="mySlides" src="{% static 'login/images/bags.jpg' %}" style="width:100%">
+            </section>
+
+            <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
+                <br>
+                <br>
+                <h2 class="w3-hide-small">Buy Anything for Less!</h2>
+                <h2 class="w3-hide-small">Sell Anything!</h2>
+                <p><a href="{% url 'products' %}" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
+            </div>
+
+            <br>
 
 
             {% block content %}
@@ -87,7 +111,7 @@
 
 </footer>
 
-<!--<script>
+<script>
     var myIndex = 0;
     carousel();
 
@@ -113,5 +137,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
--->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+{% block javascript %}
+{% endblock %}
+
 </html>
