@@ -52,9 +52,16 @@ def productlist(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
+    category_A = Product.objects.filter(category='A').count()
+    category_T = Product.objects.filter(category='T').count()
+    category_C = Product.objects.filter(category='C').count()
+
     context = {
         'page_obj': page_obj,
         'type': sort,
+        'A' : category_A,
+        'T' : category_T,
+        'C' : category_C
     }
 
     return render(request, 'login/products.html', context)
