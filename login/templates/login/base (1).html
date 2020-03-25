@@ -23,10 +23,10 @@
 
 <body>
     <ul class="navbar" style="margin-bottom: 10px;">
-        <li><a class="navbar-brand" href="{% url 'products' %}">BUY|SELL</a></li>
+        <li><a class="navbar-brand" href="{% url 'home' %}">BUY|SELL</a></li>
         <li><a class="nav-link" href="{% url 'products' %}">Products</a></li>
         <li><a class="nav-link" href="{% url 'post_product' %}">Post Product</a></li>
-        <li><a class="nav-link" href="#"><i class="fa fa-fw fa-envelope"></i>Contact</a></li>
+        <li><a class="nav-link" href="{% url 'contact' %}"><i class="fa fa-fw fa-envelope"></i>Contact</a></li>
 
         <li style="float:right"><a class="nav-link" href="{% url 'register' %}"><i class="fa fa-fw fa-user"></i>Sign
                 Up</a></li>
