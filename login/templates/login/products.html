@@ -25,20 +25,19 @@
     </form>
 </nav>
 
-<div class="body-product">
+<div class="container">
     <div class="row">
-
-        <div class="col-2 panel-left">
+        <div class="col-2 border-right border-dark">
             <div>
                 <h4 class="nav-link nav-item">Categories</h4>
-                <a class="nav-link nav-item active item-category" href="#">Appliances (200)</a>
-                <a class="nav-link nav-item item-category" href="#">Toys (198)</a>
-                <a class="nav-link nav-item item-category" href="#">Computers (111)</a>
+                <a class="nav-link nav-item active item-category" href="#">Appliances ({{A}})</a>
+                <a class="nav-link nav-item item-category" href="#">Toys ({{T}})</a>
+                <a class="nav-link nav-item item-category" href="#">Computers ({{C}})</a>
             </div>
         </div>
 
         <div class="col-10">
-            <div class="product-container">
+           <div class="product-container">
                 {% for product in page_obj  %}
                 <div class="product-card">
                     <div class="list-group d-flex">
@@ -62,9 +61,6 @@
                 
                         </a>
                         <h4 class="price">${{product.price|floatformat:2}}</h4>
-                       <!--  <p>User: {{product.user}}<br> Posted On: {{product.post_date}}</p> -->
-
-                        <!-- <button><a href="{% url 'product_detail' product.id %}">View More Details</a></button> -->
                         <button><a href="{{ product.add_to_cart_url }}">Add to Cart </a></button>
                         <button><a href="{{ product.delete_product_url }}">Delete</a></button>
 
