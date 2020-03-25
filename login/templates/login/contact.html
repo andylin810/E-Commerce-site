@@ -1,0 +1,103 @@
+{% extends 'login/base (1).html' %}
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="/static/login/contact.css?{% now "U" %}" />
+
+{% endblock %}
+
+{% block content %}
+<body>
+   
+<div class="jumbotron jumbotron-fluid bg-dark">
+  
+  <div class="jumbotron-background">
+    <img src="https://placeimg.com/2000/1000/nature" class="blur ">
+  </div>
+
+  <div class="container text-white" style="text-align:center">
+
+    <h1 class="display-4">About Us</h1>
+
+  </div>
+  <!-- /.container -->
+  
+ 
+</div>
+
+<h3 style="text-align:center"><strong>COMPANY INFORMATION</strong></h3>
+<br>
+<img src="{% static 'login/images/shopping.jpg' %}"  style="width:50%" class="middle">
+<div class="row justify-content-md-center">
+  <div class="col-md-10" >
+<div class="ex1">
+  <br>
+<h6><b>OUR VISION</b></h6>
+<p><i>Our mission is to help buyers and sellers by giving them a platform that they can buy and sell items on easily.</i></p>
+<br>
+<h6><b>COMPANY FACTS</b></h6>
+<ul>
+  <li>Canada's newest, second largest classifieds site</li><br>
+  <li>One of the fastest growing platform of 2019</li><br>
+  <li>A platform that allows Canadians to exchange goods and services efficiently</li>
+
+</ul>  
+</div>
+</div>
+</div>
+<br>
+<br>
+<hr>
+<!-- /.jumbotron 
+        
+          <div class="jumbotron">
+            <h1>About Us</h1>      
+          </div>
+          <div class="container">
+      <h2 style="text-align:center">WHO WE ARE</h2>
+      </div>
+    -->
+
+<h3 style="text-align:center"><strong>WHO WE ARE</strong></h3>
+<br>
+<div class="center" style="margin: auto">
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <img src="{% static 'login/images/male.jpg' %}"  style="width:100%">
+      <h1>Andy Lin</h1>
+      <p class="title">CEO & Founder</p>
+      <div style="margin: 12px 0;">
+        <a href="#"><i style="font-size: 22px" class="fa fa-twitter"></i></a>  
+        <a href="#"><i style="font-size: 22px" class="fa fa-linkedin"></i></a>  
+        <a href="#"><i style="font-size: 22px" class="fa fa-facebook"></i></a> 
+      </div>
+      <p><button>Contact</button></p>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <img src="{% static 'login/images/female.jpg' %}" style="width:100%">
+      <h1>Sahrish Malik</h1>
+      <p class="title">CEO & Founder</p>
+      <div style="margin: 12px 0;">
+        <a href="#"><i style="font-size: 22px" class="fa fa-twitter"></i></a>  
+        <a href="#"><i style="font-size: 22px" class="fa fa-linkedin"></i></a>  
+        <a href="#"><i style="font-size: 22px" class="fa fa-facebook"></i></a> 
+      </div>
+      <p><button>Contact</button></p>
+    </div>
+  </div>
+</div>
+</div>
+<hr class="my-4">
+<h3 id="careers" style="text-align:center"><b>CAREERS</b></h3>
+<br>
+<div class="row justify-content-md-center">
+  <div class="col-md-10" >
+<p style="padding-left: 50px;">There are currently no open positions</p>
+<br>
+</div>
+</div>
+</body>
+{% endblock %}
